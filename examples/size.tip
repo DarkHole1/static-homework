@@ -1,0 +1,19 @@
+main() {
+    var u1, s8, u16, s32, bi;
+    bi = input;
+    u1 = bi > 0;
+    if (u1) {
+        s8 = -1;
+    } else {
+        s8 = 10000 * u1;
+    }
+    u16 = -1 * s8;
+    u16 = u16 * u16;
+    u1 = u16 > s8;
+    s32 = s8 * 100;
+    while(u1) {
+        s32 = s32 - 1;
+        u1 = s32 > -10;
+    }
+    return 0;
+}

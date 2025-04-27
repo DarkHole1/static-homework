@@ -6,7 +6,7 @@ import tip.lattices.IntervalLattice._
 import tip.lattices._
 import tip.solvers._
 
-trait IntervalAnalysisWidening extends ValueAnalysisMisc with Dependencies[CfgNode] {
+trait VariableSizeAnalysis extends ValueAnalysisMisc with Dependencies[CfgNode] {
 
   import tip.cfg.CfgOps._
 
@@ -19,11 +19,7 @@ trait IntervalAnalysisWidening extends ValueAnalysisMisc with Dependencies[CfgNo
   /**
     * Int values occurring in the program, plus -infinity and +infinity.
     */
-  private val B = cfg.nodes.flatMap { n =>
-    n.appearingConstants.map { x =>
-      IntNum(x.value): Num
-    } + MInf + PInf
-  }
+  private val B: List[Num] = List(MInf, PInf, 0, 1, -128, 127, 65535, -2147483648, 2147483647)
 
   def loophead(n: CfgNode): Boolean = indep(n).exists(cfg.rank(_) > cfg.rank(n))
 
@@ -58,7 +54,7 @@ trait IntervalAnalysisWidening extends ValueAnalysisMisc with Dependencies[CfgNo
     }
 }
 
-object IntervalAnalysis {
+object VariableSizeAnalysis {
 
   object Intraprocedural {
 
